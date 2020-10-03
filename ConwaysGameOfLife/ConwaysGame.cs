@@ -17,11 +17,11 @@ namespace ConwaysGameOfLife
 
         protected override void Initialize()
         {
+            Window.Title = "Conway's Game Of Life";
+            Window.AllowUserResizing = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            Window.AllowUserResizing = true;
-            Window.Title = "Conway's Game Of Life";
             grid = new Grid(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             Window.ClientSizeChanged += (o, e) => grid.Resize(graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 

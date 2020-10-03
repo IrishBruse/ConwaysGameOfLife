@@ -66,6 +66,24 @@
           "build/MonoGame.Framework.DesktopGL.targets": {}
         }
       }
+    },
+    ".NETCoreApp,Version=v3.1/win-x86": {
+      "MonoGame.Framework.DesktopGL/3.8.0.1641": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MonoGame.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MonoGame.Framework.dll": {}
+        },
+        "native": {
+          "runtimes/win-x86/native/SDL2.dll": {},
+          "runtimes/win-x86/native/soft_oal.dll": {}
+        },
+        "build": {
+          "build/MonoGame.Framework.DesktopGL.targets": {}
+        }
+      }
     }
   },
   "libraries": {
@@ -165,11 +183,23 @@
             "version": "[3.1.8, 3.1.8]"
           },
           {
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
+            "version": "[3.1.8, 3.1.8]"
+          },
+          {
             "name": "Microsoft.NETCore.App.Runtime.win-x64",
             "version": "[3.1.8, 3.1.8]"
           },
           {
+            "name": "Microsoft.NETCore.App.Runtime.win-x86",
+            "version": "[3.1.8, 3.1.8]"
+          },
+          {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+            "version": "[3.1.8, 3.1.8]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
             "version": "[3.1.8, 3.1.8]"
           }
         ],
@@ -183,6 +213,9 @@
     },
     "runtimes": {
       "win-x64": {
+        "#import": []
+      },
+      "win-x86": {
         "#import": []
       }
     }

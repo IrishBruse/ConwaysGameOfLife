@@ -36,12 +36,16 @@ namespace ConwaysGameOfLife
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 Vector2 pos = Mouse.GetState().Position.ToVector2() / CellSize;
+                pos.X = Math.Clamp(pos.X, 0, width);
+                pos.Y = Math.Clamp(pos.Y, 0, height);
                 SetAtCurrentGeneration((int)pos.X, (int)pos.Y, true);
             }
 
             if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
                 Vector2 pos = Mouse.GetState().Position.ToVector2() / CellSize;
+                pos.X = Math.Clamp(pos.X, 0, width);
+                pos.Y = Math.Clamp(pos.Y, 0, height);
                 SetAtCurrentGeneration((int)pos.X, (int)pos.Y, false);
             }
 
