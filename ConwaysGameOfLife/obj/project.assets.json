@@ -49,6 +49,60 @@
         }
       }
     },
+    ".NETCoreApp,Version=v3.1/linux-x64": {
+      "MonoGame.Framework.DesktopGL/3.8.0.1641": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MonoGame.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MonoGame.Framework.dll": {}
+        },
+        "native": {
+          "runtimes/linux-x64/native/libSDL2-2.0.so.0": {},
+          "runtimes/linux-x64/native/libopenal.so.1": {}
+        },
+        "build": {
+          "build/MonoGame.Framework.DesktopGL.targets": {}
+        }
+      }
+    },
+    ".NETCoreApp,Version=v3.1/osx-x64": {
+      "MonoGame.Framework.DesktopGL/3.8.0.1641": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MonoGame.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MonoGame.Framework.dll": {}
+        },
+        "native": {
+          "runtimes/osx/native/libSDL2-2.0.0.dylib": {},
+          "runtimes/osx/native/libopenal.1.dylib": {}
+        },
+        "build": {
+          "build/MonoGame.Framework.DesktopGL.targets": {}
+        }
+      }
+    },
+    ".NETCoreApp,Version=v3.1/osx.10.14-x64": {
+      "MonoGame.Framework.DesktopGL/3.8.0.1641": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MonoGame.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MonoGame.Framework.dll": {}
+        },
+        "native": {
+          "runtimes/osx/native/libSDL2-2.0.0.dylib": {},
+          "runtimes/osx/native/libopenal.1.dylib": {}
+        },
+        "build": {
+          "build/MonoGame.Framework.DesktopGL.targets": {}
+        }
+      }
+    },
     ".NETCoreApp,Version=v3.1/win-x64": {
       "MonoGame.Framework.DesktopGL/3.8.0.1641": {
         "type": "package",
@@ -61,24 +115,6 @@
         "native": {
           "runtimes/win-x64/native/SDL2.dll": {},
           "runtimes/win-x64/native/soft_oal.dll": {}
-        },
-        "build": {
-          "build/MonoGame.Framework.DesktopGL.targets": {}
-        }
-      }
-    },
-    ".NETCoreApp,Version=v3.1/win-x86": {
-      "MonoGame.Framework.DesktopGL/3.8.0.1641": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/MonoGame.Framework.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/MonoGame.Framework.dll": {}
-        },
-        "native": {
-          "runtimes/win-x86/native/SDL2.dll": {},
-          "runtimes/win-x86/native/soft_oal.dll": {}
         },
         "build": {
           "build/MonoGame.Framework.DesktopGL.targets": {}
@@ -179,11 +215,31 @@
         "warn": true,
         "downloadDependencies": [
           {
+            "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
+            "version": "[3.1.8, 3.1.8]"
+          },
+          {
+            "name": "Microsoft.AspNetCore.App.Runtime.osx-x64",
+            "version": "[3.1.8, 3.1.8]"
+          },
+          {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
             "version": "[3.1.8, 3.1.8]"
           },
           {
-            "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
+            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "version": "[3.1.8, 3.1.8]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.osx-x64",
+            "version": "[3.1.8, 3.1.8]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Runtime.linux-x64",
+            "version": "[3.1.8, 3.1.8]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Runtime.osx-x64",
             "version": "[3.1.8, 3.1.8]"
           },
           {
@@ -191,15 +247,7 @@
             "version": "[3.1.8, 3.1.8]"
           },
           {
-            "name": "Microsoft.NETCore.App.Runtime.win-x86",
-            "version": "[3.1.8, 3.1.8]"
-          },
-          {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-            "version": "[3.1.8, 3.1.8]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
             "version": "[3.1.8, 3.1.8]"
           }
         ],
@@ -212,10 +260,16 @@
       }
     },
     "runtimes": {
-      "win-x64": {
+      "linux-x64": {
         "#import": []
       },
-      "win-x86": {
+      "osx-x64": {
+        "#import": []
+      },
+      "osx.10.14-x64": {
+        "#import": []
+      },
+      "win-x64": {
         "#import": []
       }
     }

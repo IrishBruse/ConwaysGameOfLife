@@ -7,6 +7,14 @@ E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win
 E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win-x64\MonoGame.Framework.dll
 E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win-x64\SDL2.dll
 E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win-x64\soft_oal.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.csprojAssemblyReference.cache
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.AssemblyInfoInputs.cache
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.AssemblyInfo.cs
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.csproj.CoreCompileInputs.cache
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.csproj.CopyComplete
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.pdb
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.genruntimeconfig.cache
 E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win-x64\Microsoft.CSharp.dll
 E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win-x64\Microsoft.VisualBasic.Core.dll
 E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win-x64\Microsoft.VisualBasic.dll
@@ -227,11 +235,3 @@ E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win
 E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win-x64\mscorrc.debug.dll
 E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win-x64\mscorrc.dll
 E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\win-x64\ucrtbase.dll
-E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.csprojAssemblyReference.cache
-E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.AssemblyInfoInputs.cache
-E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.AssemblyInfo.cs
-E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.csproj.CoreCompileInputs.cache
-E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.csproj.CopyComplete
-E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.dll
-E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.pdb
-E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\win-x64\ConwaysGameOfLife.genruntimeconfig.cache

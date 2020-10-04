@@ -1,0 +1,17 @@
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.exe
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.deps.json
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.runtimeconfig.json
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.runtimeconfig.dev.json
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.pdb
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\netcoreapp3.1\win10-x64\MonoGame.Framework.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\netcoreapp3.1\win10-x64\SDL2.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\netcoreapp3.1\win10-x64\soft_oal.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.csprojAssemblyReference.cache
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.AssemblyInfoInputs.cache
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.AssemblyInfo.cs
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.csproj.CoreCompileInputs.cache
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.csproj.CopyComplete
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.pdb
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\netcoreapp3.1\win10-x64\ConwaysGameOfLife.genruntimeconfig.cache

@@ -1,0 +1,17 @@
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.deps.json
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.runtimeconfig.json
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.runtimeconfig.dev.json
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.pdb
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\osx.10.14-x64\MonoGame.Framework.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\osx.10.14-x64\libSDL2-2.0.0.dylib
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\bin\Release\netcoreapp3.1\osx.10.14-x64\libopenal.1.dylib
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.csprojAssemblyReference.cache
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.AssemblyInfoInputs.cache
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.AssemblyInfo.cs
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.csproj.CoreCompileInputs.cache
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.csproj.CopyComplete
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.dll
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.pdb
+E:\Projects\C#\ConwaysGameOfLife\ConwaysGameOfLife\obj\Release\netcoreapp3.1\osx.10.14-x64\ConwaysGameOfLife.genruntimeconfig.cache

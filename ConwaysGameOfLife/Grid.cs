@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,6 +11,8 @@ namespace ConwaysGameOfLife
         bool[,] gridA;
         bool[,] gridB;
 
+        int[,] heatmap;
+
         bool useA = true;
 
         Texture2D pixel;
@@ -21,14 +22,14 @@ namespace ConwaysGameOfLife
         int height;
 
         KeyboardState oldKeyboardState;
-
-        Random rng = new Random(0);
+        readonly Random rng = new Random(0);
 
         public Grid(int width, int height)
         {
             this.width = width / CellSize;
             this.height = height / CellSize;
             gridA = gridB = new bool[this.width, this.height];
+            heatmap = new int[this.width, this.height];
         }
 
         public void Update()
@@ -36,17 +37,27 @@ namespace ConwaysGameOfLife
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 Vector2 pos = Mouse.GetState().Position.ToVector2() / CellSize;
-                pos.X = Math.Clamp(pos.X, 0, width);
-                pos.Y = Math.Clamp(pos.Y, 0, height);
-                SetAtCurrentGeneration((int)pos.X, (int)pos.Y, true);
+
+                if (pos.X > 0 && pos.X < width)
+                {
+                    if (pos.Y > 0 && pos.Y < height)
+                    {
+                        SetAtCurrentGeneration((int)pos.X, (int)pos.Y, true);
+                    }
+                }
             }
 
             if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
                 Vector2 pos = Mouse.GetState().Position.ToVector2() / CellSize;
-                pos.X = Math.Clamp(pos.X, 0, width);
-                pos.Y = Math.Clamp(pos.Y, 0, height);
-                SetAtCurrentGeneration((int)pos.X, (int)pos.Y, false);
+
+                if (pos.X > 0 && pos.X < width)
+                {
+                    if (pos.Y > 0 && pos.Y < height)
+                    {
+                        SetAtCurrentGeneration((int)pos.X, (int)pos.Y, false);
+                    }
+                }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.R) == true && oldKeyboardState.IsKeyUp(Keys.R))
@@ -65,13 +76,8 @@ namespace ConwaysGameOfLife
 
             if (Keyboard.GetState().IsKeyDown(Keys.C) == true && oldKeyboardState.IsKeyUp(Keys.C))
             {
-                for (int x = 0; x < gridA.GetLength(0); x++)
-                {
-                    for (int y = 0; y < gridA.GetLength(1); y++)
-                    {
-                        SetAtCurrentGeneration(x, y, false);
-                    }
-                }
+                gridA = gridB = new bool[width, height];
+                heatmap = new int[width, height];
             }
 
             if ((Keyboard.GetState().IsKeyDown(Keys.Space) == true && oldKeyboardState.IsKeyUp(Keys.Space)) || Keyboard.GetState().IsKeyDown(Keys.V) == true)
@@ -91,17 +97,15 @@ namespace ConwaysGameOfLife
                     {
                         int neightbourCount = GetNeighbourCount(x, y);
 
-                        if (GetAtCurrentGeneration(x, y) == true && (neightbourCount == 2 || neightbourCount == 3))
+                        if ((GetAtCurrentGeneration(x, y) == true && (neightbourCount == 2 || neightbourCount == 3)) ||
+                             GetAtCurrentGeneration(x, y) == false && neightbourCount == 3)
                         {
                             SetAtNextGeneration(x, y, true);
-                            continue;
-                        }
-                        if (GetAtCurrentGeneration(x, y) == false && neightbourCount == 3)
-                        {
-                            SetAtNextGeneration(x, y, true);
+                            heatmap[x, y] += 16;
                             continue;
                         }
 
+                        heatmap[x, y] = 0;
                         SetAtNextGeneration(x, y, false);
                     }
                 }
@@ -120,6 +124,8 @@ namespace ConwaysGameOfLife
             bool[,] temp = useA ? gridA : gridB;
 
             gridA = gridB = new bool[this.width, this.height];
+
+            heatmap = new int[this.width, this.height];
 
             int sizex = Math.Min(temp.GetLength(0), this.width);
             int sizey = Math.Min(temp.GetLength(1), this.height);
@@ -202,7 +208,8 @@ namespace ConwaysGameOfLife
                     {
                         if (GetAtCurrentGeneration(x, y) == true)
                         {
-                            spriteBatch.Draw(pixel, new Vector2((x * CellSize) + 1, (y * CellSize) + 1), null, Color.White, 0, Vector2.Zero, CellSize - 2, SpriteEffects.None, 0);
+                            Color color = new Color(heatmap[x, y], 255, 0, 255);
+                            spriteBatch.Draw(pixel, new Vector2((x * CellSize) + 1, (y * CellSize) + 1), null, color, 0, Vector2.Zero, CellSize - 2, SpriteEffects.None, 0);
                         }
                     }
                 }
