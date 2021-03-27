@@ -10,7 +10,8 @@ A recreation of the conways game of life cellular automaton
 
 -   `Left click` creates alive cells
 -   `Right click` creates dead cells
--   `R` will add random alive cells to the screen
--   `C` will clear everything from the screen
--   `Space` steps the simulation
--   `V` steps the simulation at 60 steps per second
+-   `Middle click` and dragging will pan the camera around
+-   `Scroll whell` zooms in and out
+-   `R` will clear everything from the screen
+-   `Space` ticks the simulation once
+-   `P` toggles running the simulation at 60 ticks per second

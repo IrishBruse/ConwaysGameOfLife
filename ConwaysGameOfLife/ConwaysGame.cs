@@ -5,9 +5,9 @@ namespace ConwaysGameOfLife
 {
     public class ConwaysGame : Game
     {
-        private GraphicsDeviceManager graphics;
+        private readonly GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-
+        private Camera camera;
         Grid grid;
 
         public ConwaysGame()
@@ -19,11 +19,14 @@ namespace ConwaysGameOfLife
         {
             Window.Title = "Conway's Game Of Life";
             Window.AllowUserResizing = true;
-            Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            grid = new Grid(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-            Window.ClientSizeChanged += (o, e) => grid.Resize(graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+
+            camera = new Camera();
+            camera.Resize(graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+            Window.ClientSizeChanged += (o, e) => camera.Resize(graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+
+            grid = new Grid(camera);
 
             base.Initialize();
         }
@@ -37,6 +40,7 @@ namespace ConwaysGameOfLife
 
         protected override void Update(GameTime gameTime)
         {
+            camera.Update(gameTime);
             grid.Update();
 
             base.Update(gameTime);

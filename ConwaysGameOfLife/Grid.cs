@@ -1,224 +1,205 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using FontStashSharp;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using System;
 
 namespace ConwaysGameOfLife
 {
     public class Grid
     {
-        bool[,] gridA;
-        bool[,] gridB;
+        private Dictionary<Point, bool> gridFrontBuffer = new Dictionary<Point, bool>();
+        private Dictionary<Point, bool> gridBackbuffer = new Dictionary<Point, bool>();
+        private Dictionary<Point, byte> gridNeighbourCount = new Dictionary<Point, byte>();
 
-        int[,] heatmap;
 
-        bool useA = true;
+        private Texture2D pixel;
 
-        Texture2D pixel;
+        private const int CellSize = 16;
+        private KeyboardState oldKeyboardState;
 
-        const int CellSize = 16;
-        int width;
-        int height;
+        private readonly Camera camera;
+        private Vector2 gridMousePosition;
+        private FontSystem fontSystem;
+        private DynamicSpriteFont coordinatesFont;
+        private bool playing;
 
-        KeyboardState oldKeyboardState;
-        readonly Random rng = new Random(0);
-
-        public Grid(int width, int height)
+        public Grid(Camera camera)
         {
-            this.width = width / CellSize;
-            this.height = height / CellSize;
-            gridA = gridB = new bool[this.width, this.height];
-            heatmap = new int[this.width, this.height];
+            this.camera = camera;
         }
 
         public void Update()
         {
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                Vector2 pos = Mouse.GetState().Position.ToVector2() / CellSize;
+            MouseState mouse = Mouse.GetState();
+            KeyboardState keyboard = Keyboard.GetState();
 
-                if (pos.X > 0 && pos.X < width)
-                {
-                    if (pos.Y > 0 && pos.Y < height)
-                    {
-                        SetAtCurrentGeneration((int)pos.X, (int)pos.Y, true);
-                    }
-                }
+            gridMousePosition = Vector2.Transform(mouse.Position.ToVector2(), camera.InverseMatrix);
+            gridMousePosition = new Vector2(MathF.Floor(gridMousePosition.X / CellSize), MathF.Floor(gridMousePosition.Y / CellSize));
+
+            if (mouse.LeftButton == ButtonState.Pressed)
+            {
+                playing = false;
+                SetAtCurrentGeneration(gridMousePosition.ToPoint(), true);
             }
 
-            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            if (mouse.RightButton == ButtonState.Pressed)
             {
-                Vector2 pos = Mouse.GetState().Position.ToVector2() / CellSize;
-
-                if (pos.X > 0 && pos.X < width)
-                {
-                    if (pos.Y > 0 && pos.Y < height)
-                    {
-                        SetAtCurrentGeneration((int)pos.X, (int)pos.Y, false);
-                    }
-                }
+                playing = false;
+                SetAtCurrentGeneration(gridMousePosition.ToPoint(), false);
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.R) == true && oldKeyboardState.IsKeyUp(Keys.R))
+            // Clear everything
+            if (keyboard.IsKeyDown(Keys.R) && oldKeyboardState.IsKeyUp(Keys.R))
             {
-                for (int x = 0; x < gridA.GetLength(0); x++)
+                gridFrontBuffer = new Dictionary<Point, bool>();
+            }
+
+            if (keyboard.IsKeyDown(Keys.P) && oldKeyboardState.IsKeyUp(Keys.P))
+            {
+                playing = !playing;
+            }
+
+            // Run or step simulation
+            if ((keyboard.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space)) || playing)
+            {
+                Tick();
+            }
+
+            oldKeyboardState = keyboard;
+        }
+
+        private void Tick()
+        {
+            gridBackbuffer = new Dictionary<Point, bool>();
+            gridNeighbourCount = new Dictionary<Point, byte>();
+
+            foreach (var cell in gridFrontBuffer)
+            {
+                int neightbourCount = 0;
+
+                for (int X = -1; X <= 1; X++)
                 {
-                    for (int y = 0; y < gridA.GetLength(1); y++)
+                    for (int Y = -1; Y <= 1; Y++)
                     {
-                        if (rng.Next(0, 10) == 0)
+                        if (X == 0 && Y == 0)
                         {
-                            SetAtCurrentGeneration(x, y, true);
-                        }
-                    }
-                }
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.C) == true && oldKeyboardState.IsKeyUp(Keys.C))
-            {
-                gridA = gridB = new bool[width, height];
-                heatmap = new int[width, height];
-            }
-
-            if ((Keyboard.GetState().IsKeyDown(Keys.Space) == true && oldKeyboardState.IsKeyUp(Keys.Space)) || Keyboard.GetState().IsKeyDown(Keys.V) == true)
-            {
-                if (useA == false)
-                {
-                    gridA = new bool[width, height];
-                }
-                else
-                {
-                    gridB = new bool[width, height];
-                }
-
-                for (int x = 0; x < width; x++)
-                {
-                    for (int y = 0; y < height; y++)
-                    {
-                        int neightbourCount = GetNeighbourCount(x, y);
-
-                        if ((GetAtCurrentGeneration(x, y) == true && (neightbourCount == 2 || neightbourCount == 3)) ||
-                             GetAtCurrentGeneration(x, y) == false && neightbourCount == 3)
-                        {
-                            SetAtNextGeneration(x, y, true);
-                            heatmap[x, y] += 16;
                             continue;
                         }
 
-                        heatmap[x, y] = 0;
-                        SetAtNextGeneration(x, y, false);
+                        var neighbourCell = new Point(cell.Key.X + X, cell.Key.Y + Y);
+                        if (GetAtCurrentGeneration(cell.Key) == true)
+                        {
+                            if (gridNeighbourCount.TryAdd(neighbourCell, 1) == false)
+                            {
+                                gridNeighbourCount[neighbourCell] += 1;
+                            }
+                        }
+
+                        if (GetAtCurrentGeneration(neighbourCell) == true)
+                        {
+                            neightbourCount++;
+                        }
                     }
                 }
 
-                useA = !useA;
-            }
+                bool alive = GetAtCurrentGeneration(cell.Key);
 
-            oldKeyboardState = Keyboard.GetState();
-        }
+                bool rule1 = alive == true && (neightbourCount == 2 || neightbourCount == 3);
+                bool rule2 = alive == false && neightbourCount == 3;
 
-        public void Resize(int width, int height)
-        {
-            this.width = width / CellSize;
-            this.height = height / CellSize;
-
-            bool[,] temp = useA ? gridA : gridB;
-
-            gridA = gridB = new bool[this.width, this.height];
-
-            heatmap = new int[this.width, this.height];
-
-            int sizex = Math.Min(temp.GetLength(0), this.width);
-            int sizey = Math.Min(temp.GetLength(1), this.height);
-
-            for (int x = 0; x < sizex; x++)
-            {
-                for (int y = 0; y < sizey; y++)
+                if (rule1 || rule2)
                 {
-                    gridA[x, y] = gridB[x, y] = temp[x, y];
+                    SetAtNextGeneration(cell.Key, true);
+                    continue;
                 }
-            }
-        }
 
-        void SetAtNextGeneration(int x, int y, bool state)
-        {
-            if (useA == false)
-            {
-                gridA[(x + width) % width, (y + height) % height] = state;
+                SetAtNextGeneration(cell.Key, false);
             }
-            else
-            {
-                gridB[(x + width) % width, (y + height) % height] = state;
-            }
-        }
 
-        void SetAtCurrentGeneration(int x, int y, bool state)
-        {
-            if (useA == true)
+            foreach (var cell in gridNeighbourCount)
             {
-                gridA[(x + width) % width, (y + height) % height] = state;
-            }
-            else
-            {
-                gridB[(x + width) % width, (y + height) % height] = state;
-            }
-        }
-
-        public bool GetAtCurrentGeneration(int x, int y)
-        {
-            if (useA == true)
-            {
-                return gridA[(x + width) % width, (y + height) % height];
-            }
-            else
-            {
-                return gridB[(x + width) % width, (y + height) % height];
-            }
-        }
-
-        int GetNeighbourCount(int x, int y)
-        {
-            int neightbourCount = 0;
-
-            for (int X = -1; X <= 1; X++)
-            {
-                for (int Y = -1; Y <= 1; Y++)
+                if (cell.Value == 3)
                 {
-                    if (X == 0 && Y == 0)
-                    {
-                        continue;
-                    }
-
-                    if (GetAtCurrentGeneration(x + X, y + Y) == true)
-                    {
-                        neightbourCount++;
-                    }
+                    SetAtNextGeneration(cell.Key, true);
                 }
             }
 
-            return neightbourCount;
+            gridFrontBuffer = gridBackbuffer;
+        }
+
+        private void SetAtNextGeneration(Point pos, bool state)
+        {
+            if (gridBackbuffer.ContainsKey(pos) == true)
+            {
+                gridBackbuffer[pos] = state;
+            }
+            else
+            {
+                gridBackbuffer.Add(pos, state);
+            }
+        }
+
+        private void SetAtCurrentGeneration(Point pos, bool state)
+        {
+            if (gridFrontBuffer.ContainsKey(pos) == true)
+            {
+                gridFrontBuffer[pos] = state;
+            }
+            else
+            {
+                gridFrontBuffer.Add(pos, state);
+            }
+        }
+
+        public bool GetAtCurrentGeneration(Point pos)
+        {
+            if (gridFrontBuffer.ContainsKey(pos) == true)
+            {
+                return gridFrontBuffer[pos];
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.Matrix);
             {
-                for (int x = 0; x < width; x++)
+                foreach (var cell in gridFrontBuffer)
                 {
-                    for (int y = 0; y < height; y++)
+                    if (GetAtCurrentGeneration(cell.Key) == true)
                     {
-                        if (GetAtCurrentGeneration(x, y) == true)
-                        {
-                            Color color = new Color(heatmap[x, y], 255, 0, 255);
-                            spriteBatch.Draw(pixel, new Vector2((x * CellSize) + 1, (y * CellSize) + 1), null, color, 0, Vector2.Zero, CellSize - 2, SpriteEffects.None, 0);
-                        }
+                        Color color = new(255, 255, 255, 255);
+                        spriteBatch.Draw(pixel, new Vector2((cell.Key.X * CellSize) + 1, (cell.Key.Y * CellSize) + 1), null, color, 0, Vector2.Zero, CellSize - 2, SpriteEffects.None, 0);
+                    }
+                    else
+                    {
+                        Color color = new(128, 128, 128, 255);
+                        spriteBatch.Draw(pixel, new Vector2((cell.Key.X * CellSize) + 1, (cell.Key.Y * CellSize) + 1), null, color, 0, Vector2.Zero, CellSize - 2, SpriteEffects.None, 0);
                     }
                 }
+            }
+            spriteBatch.End();
+
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            {
+                spriteBatch.DrawString(coordinatesFont, $"{gridMousePosition.X},{gridMousePosition.Y}", Vector2.One * 15, Color.White);
             }
             spriteBatch.End();
         }
 
         public void LoadContent(GraphicsDevice graphicsDevice)
         {
+            fontSystem = FontSystemFactory.Create(graphicsDevice, 1024, 1024);
+            fontSystem.AddFont(File.ReadAllBytes(@"C:\\Windows\\Fonts\arial.ttf"));
+
+            coordinatesFont = fontSystem.GetFont(24);
+
             pixel = new Texture2D(graphicsDevice, 1, 1);
             pixel.SetData(new uint[] { 0xFFFFFFFF });
         }
